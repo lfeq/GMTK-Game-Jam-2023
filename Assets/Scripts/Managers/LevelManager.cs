@@ -28,7 +28,7 @@ public class LevelManager : MonoBehaviour {
             case LevelState.Dodging:
                 break;
             default:
-                throw new UnityException("Invalid Level State");
+                throw new UnityException("Invalid Levela State");
         }
     }
 
