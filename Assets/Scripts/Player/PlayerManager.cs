@@ -33,6 +33,12 @@ public class PlayerManager : MonoBehaviour {
             case PlayerState.RunState:
                 animator.SetBool("IsRun", true);
                 break;
+            case PlayerState.RunBack:
+                animator.SetBool("IsRunBack", true);
+                break;
+            case PlayerState.RunFront:
+                animator.SetBool("IsRunFront", true);
+                break;
             case PlayerState.DeadState:
                 animator.SetBool("IsDead", true);
                 break;
@@ -55,5 +61,7 @@ public enum PlayerState {
     NullState,
     IdleState,
     RunState,
+    RunFront,
+    RunBack,
     DeadState
 }

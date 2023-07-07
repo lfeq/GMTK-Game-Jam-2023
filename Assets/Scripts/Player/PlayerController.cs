@@ -42,6 +42,12 @@ public class PlayerController : MonoBehaviour {
         } else if (xMove == 0) {
             PlayerManager.instance.ChangePlayerStates(PlayerState.IdleState);
         }
+        if(yMove >= 0.1f) {
+            PlayerManager.instance.ChangePlayerStates(PlayerState.RunBack);
+        }
+        if (yMove <= -0.1f) {
+            PlayerManager.instance.ChangePlayerStates(PlayerState.RunFront);
+        }
     }
     void flip() {
         transform.Rotate(0, 180, 0);
