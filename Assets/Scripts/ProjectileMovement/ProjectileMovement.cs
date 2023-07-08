@@ -14,6 +14,9 @@ public class ProjectileMovement : MonoBehaviour {
         float angle = Mathf.Atan2(yMove, xMove) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0f, 0f, angle);
         rb2d = GetComponent<Rigidbody2D>();
+        if (moveDirection == Vector2.zero) {
+            Destroy(gameObject);
+        }
         Destroy(gameObject, 10);
     }
 
