@@ -14,12 +14,13 @@ public class EnemyControllerBattle : MonoBehaviour
     }
 
     private void Start() {
+        canShoot = true;
         setTime = timer;
     }
 
     private void Update() {
         timer -= Time.deltaTime;
-        if (timer < 0) {
+        if (timer < 0 && canShoot) {
             tryToCatch();
             timer = setTime;
         }
