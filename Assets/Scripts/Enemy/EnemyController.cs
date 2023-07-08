@@ -6,13 +6,18 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Color slowedColor = Color.green;
     [SerializeField] private Sprite backViewSprite;
-
+    [SerializeField] private EnemyState enemyState;
+    [SerializeField] public Transform[] movementPoints;
+    [SerializeField] private float minimalDistance
+        ;
     private Transform player;
     private Animator animator;
     private float m_movementSpeed;
     private bool isSlowed = false;
     private SpriteRenderer spriteRenderer;
     private NavMeshAgent navMeshAgent;
+    private int randomNumber;
+
 
     private void Awake() {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -25,11 +30,20 @@ public class EnemyController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        if(movementPoints.Length != 0) {
+            randomNumber = Random.Range(0, movementPoints.Length);
+        }
     }
-
     private void Update() {
-        move();
-        lookAtPlayer();
+        switch (enemyState) {
+            case EnemyState.patroling:
+                Patrol();
+                break;
+            case EnemyState.chasing:
+                move();
+                lookAtPlayer();
+                break;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -50,6 +64,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void move() {
+       
         navMeshAgent.SetDestination(player.position);
     }
 
@@ -63,10 +78,27 @@ public class EnemyController : MonoBehaviour {
         StartCoroutine(StopSlow());
     }
 
+    private void Patrol() {
+        //transform.position = Vector2.MoveTowards(transform.position, movementPoints[randomNumber].position, movementSpeed * Time.deltaTime);
+        navMeshAgent.SetDestination(movementPoints[randomNumber].position);
+        if (Vector2.Distance(transform.position, movementPoints[randomNumber].position) < minimalDistance) {
+            randomNumber = Random.Range(0, movementPoints.Length);
+        }
+    }
+
     private IEnumerator StopSlow() {
         yield return new WaitForSeconds(4);
         isSlowed = false;
         m_movementSpeed = movementSpeed;
         spriteRenderer.color = Color.white;
     }
+    
+    public void ChanceState(EnemyState newState) {
+        enemyState = newState;
+    }
+}
+
+public enum EnemyState{
+    chasing,
+    patroling
 }
