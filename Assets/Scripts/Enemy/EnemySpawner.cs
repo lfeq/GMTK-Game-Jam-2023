@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour {
     private float timer;
 
     private void Start() {
-        EnemyManager.instance.AddEnemySpawn(this);
         timer = spawnTimeInSeconds;
     }
 
@@ -20,7 +19,8 @@ public class EnemySpawner : MonoBehaviour {
 
     public void SpawnEnemy() {
         int randomEnemy = Random.Range(0, enemies.Length);
-        Instantiate(enemies[randomEnemy], transform.position, Quaternion.identity);
+        GameObject tempEnemy = Instantiate(enemies[randomEnemy], transform.position, Quaternion.identity);
+        EnemyManager.instance.AddEnemyToList(tempEnemy);
         timer = spawnTimeInSeconds;
     }
 }

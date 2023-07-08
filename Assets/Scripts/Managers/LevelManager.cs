@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour {
@@ -6,6 +7,8 @@ public class LevelManager : MonoBehaviour {
     private LevelState m_levelState;
     private Sprite enemySprite;
     private Vector2 playerPos;
+    private List<Vector2> specialEnemiesPositions = new List<Vector2>();
+    private List<Vector2> enemiesPositions = new List<Vector2>();
 
     private void Awake() {
         if (s_instance != null && s_instance != this) {
@@ -52,8 +55,23 @@ public class LevelManager : MonoBehaviour {
 
     private void ChangeDodgeScene() {
         playerPos = PlayerManager.instance.transform.position;
-        //Guardar ubicacion de enemigos
+        SafeSpecialEnemiesPositions();
+        SafeEnemiesPositions();
         //Cambiar de escena
+    }
+
+    private void SafeSpecialEnemiesPositions() {
+        List<GameObject> specialEnemies = EnemyManager.instance.GetSpecialEnemiesList();
+        foreach (GameObject enemy in specialEnemies) {
+            specialEnemiesPositions.Add(enemy.transform.position);
+        }
+    }
+
+    private void SafeEnemiesPositions() {
+        List<GameObject> enemies = EnemyManager.instance.GetEnemyList();
+        foreach (GameObject enemy in enemies) {
+            enemiesPositions.Add(enemy.transform.position);
+        }
     }
 }
 
