@@ -28,6 +28,7 @@ public class CaughtInBall : MonoBehaviour
             hasEscaped = true;
             PlayerControllerBattle.instance.isInBall = false;
             PlayerControllerBattle.instance.spriteRenderer.enabled = true;
+            LevelManager.s_instance.ChangeLevelState(LevelState.Escaping);
             Destroy(gameObject);
 
         }

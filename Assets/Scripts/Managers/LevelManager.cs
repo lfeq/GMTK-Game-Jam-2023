@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour {
         m_levelState = t_levelState;
         switch (m_levelState) {
             case LevelState.Escaping:
+                ChangeEscapingScene();
                 //Cambiar a escena de persecucion
                 break;
             case LevelState.Dodging:
@@ -39,6 +40,10 @@ public class LevelManager : MonoBehaviour {
             default:
                 throw new UnityException("Invalid Levela State");
         }
+    }
+
+    void ChangeEscapingScene() {
+        SceneManager.LoadScene("Copia_Level_1_Test"); // Escena temporal
     }
 
     public void RestartLevel() {
