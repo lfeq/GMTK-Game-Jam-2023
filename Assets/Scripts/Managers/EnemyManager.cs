@@ -4,10 +4,9 @@ using UnityEngine;
 public class EnemyManager : MonoBehaviour {
     public static EnemyManager instance;
 
-    [SerializeField] private float spawnTimeInSeconds = 3f;
+    [SerializeField] private List<GameObject> specialEnemies = new List<GameObject>();
 
-    private float timeUntilNextSpawn;
-    private List<EnemySpawner> enemySpawners = new List<EnemySpawner>();
+    private List<GameObject> enemies = new List<GameObject>();
 
     private void Awake() {
         if (instance != null && instance != this) {
@@ -17,26 +16,15 @@ public class EnemyManager : MonoBehaviour {
         instance = this;
     }
 
-    private void Start() {
-        timeUntilNextSpawn = spawnTimeInSeconds;
+    public void AddEnemyToList(GameObject t_enemy) {
+        enemies.Add(t_enemy);
     }
 
-    private void Update() {
-        timeUntilNextSpawn -= Time.deltaTime;
-        if (timeUntilNextSpawn < 0) {
-            Spawn();
-        }
+    public List<GameObject> GetEnemyList() {
+        return enemies;
     }
 
-    public void AddEnemySpawn(EnemySpawner spawner) {
-        enemySpawners.Add(spawner);
-    }
-
-    private void Spawn() {
-        timeUntilNextSpawn = spawnTimeInSeconds;
-        if (enemySpawners.Count == 0) { return; }
-        int randomSpawn = Random.Range(0, enemySpawners.Count);
-        enemySpawners[randomSpawn].SpawnEnemy();
-        enemySpawners.RemoveAt(randomSpawn);
+    public List<GameObject> GetSpecialEnemiesList() {
+        return specialEnemies;
     }
 }
