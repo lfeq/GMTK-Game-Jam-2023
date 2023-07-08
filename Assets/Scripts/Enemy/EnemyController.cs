@@ -50,7 +50,14 @@ public class EnemyController : MonoBehaviour {
         if (collision.CompareTag("Projectile")) {
             Slow();
         }
-        if (collision.CompareTag("Player")) {
+        //if (collision.CompareTag("Player")) {
+        //    LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
+        //    LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
+        //}
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision) {
+        if (collision.gameObject.CompareTag("Player")) {
             LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
             LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
         }
