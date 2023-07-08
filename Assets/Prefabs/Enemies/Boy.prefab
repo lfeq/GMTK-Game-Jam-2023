@@ -170,3 +170,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 0
   slowedColor: {r: 0, g: 1, b: 0, a: 1}
+  backViewSprite: {fileID: -706063812, guid: 6bd7e4d4b5731e740ab765b13b30e591, type: 3}

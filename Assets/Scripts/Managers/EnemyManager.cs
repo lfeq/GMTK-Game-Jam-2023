@@ -37,5 +37,6 @@ public class EnemyManager : MonoBehaviour {
         if (enemySpawners.Count == 0) { return; }
         int randomSpawn = Random.Range(0, enemySpawners.Count);
         enemySpawners[randomSpawn].SpawnEnemy();
+        enemySpawners.RemoveAt(randomSpawn);
     }
 }

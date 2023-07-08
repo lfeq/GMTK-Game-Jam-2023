@@ -1,10 +1,10 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Color slowedColor = Color.green;
+    [SerializeField] private Sprite backViewSprite;
 
     private Transform player;
     private Animator animator;
@@ -27,6 +27,10 @@ public class EnemyController : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Projectile")) {
             Slow();
+        }
+        if (collision.CompareTag("Player")) {
+            LevelManager.s_instance.changeEnemySprite(backViewSprite);
+            LevelManager.s_instance.changeLevelState(LevelState.Dodging);
         }
     }
 
