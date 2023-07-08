@@ -8,7 +8,9 @@ public class PlayerManager : MonoBehaviour {
 
     private PlayerState playerState;
     private Animator animator;
-    
+
+    ManagerCollectorFrut managerCollectorFrut;
+
     private void Awake() {
         instance = this;
         playerState = PlayerState.NullState;
@@ -53,6 +55,20 @@ public class PlayerManager : MonoBehaviour {
             if (parameter.type == AnimatorControllerParameterType.Bool) {
                 animator.SetBool(parameter.name, false);
             }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision) {
+        if (collision.CompareTag("Fruta_1")) {
+            ManagerCollectorFrut.instance.getFruits(0);
+        } else if (collision.CompareTag("Fruta_2")) {
+            ManagerCollectorFrut.instance.getFruits(1);
+        } else if (collision.CompareTag("Fruta_3")) {
+            ManagerCollectorFrut.instance.getFruits(2);
+        } else if (collision.CompareTag("Fruta_4")) {
+            ManagerCollectorFrut.instance.getFruits(3);
+        } else if (collision.CompareTag("Fruta_5")) {
+            ManagerCollectorFrut.instance.getFruits(4);
         }
     }
 }
