@@ -7,11 +7,8 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] private Color slowedColor = Color.green;
     [SerializeField] private Sprite backViewSprite;
     [SerializeField] private EnemyState enemyState;
-    [SerializeField] public Transform[] movementPoints;
-
-    [SerializeField]
-    private float minimalDistance
-        ;
+    [SerializeField] private Transform[] movementPoints;
+    [SerializeField] private float minimalDistance;
 
     private Transform player;
     private Animator animator;
