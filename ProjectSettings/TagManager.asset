@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Projectile
   - Enemy
+  - Fruta_1
+  - Fruta_2
+  - Fruta_3
+  - Fruta_4
+  - Fruta_5
   layers:
   - Default
   - TransparentFX
