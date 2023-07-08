@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour {
     [SerializeField] private float movementSpeed;
@@ -11,17 +12,25 @@ public class EnemyController : MonoBehaviour {
     private float m_movementSpeed;
     private bool isSlowed = false;
     private SpriteRenderer spriteRenderer;
+    private NavMeshAgent navMeshAgent;
+
+    private void Awake() {
+        navMeshAgent = GetComponent<NavMeshAgent>();
+    }
 
     private void Start() {
         player = PlayerManager.instance.transform;
         animator = GetComponent<Animator>();
         m_movementSpeed = movementSpeed;
         spriteRenderer = GetComponent<SpriteRenderer>();
+        navMeshAgent.updateRotation = false;
+        navMeshAgent.updateUpAxis = false;
     }
 
     private void Update() {
-        move();
-        lookAtPlayer();
+        navMeshAgent.SetDestination(player.position);
+        //move();
+        //lookAtPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
