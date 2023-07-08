@@ -4,7 +4,7 @@ public class MoveCatchingBall : MonoBehaviour
 {
     [SerializeField] float ballSpeed = 2f;
     Vector2 playerPosition;
-
+    
     private void Awake() {
         playerPosition = PlayerControllerBattle.instance.transform.position;
         Debug.Log("Player pos start: " + playerPosition);
