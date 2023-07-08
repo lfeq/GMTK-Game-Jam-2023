@@ -71,7 +71,7 @@ public class GameManager : MonoBehaviour {
     }
 
     private void loadLevel() {
-        SceneManager.LoadScene(m_newLevel);
+        SceneManager.LoadScene("Level_1");
     }
 
     private void quitGame() {

@@ -8,8 +8,11 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] private Sprite backViewSprite;
     [SerializeField] private EnemyState enemyState;
     [SerializeField] public Transform[] movementPoints;
-    [SerializeField] private float minimalDistance
+
+    [SerializeField]
+    private float minimalDistance
         ;
+
     private Transform player;
     private Animator animator;
     private float m_movementSpeed;
@@ -17,7 +20,6 @@ public class EnemyController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private NavMeshAgent navMeshAgent;
     private int randomNumber;
-
 
     private void Awake() {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -30,10 +32,11 @@ public class EnemyController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
-        if(movementPoints.Length != 0) {
+        if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
     }
+
     private void Update() {
         switch (enemyState) {
             case EnemyState.patroling:
@@ -51,8 +54,8 @@ public class EnemyController : MonoBehaviour {
             Slow();
         }
         if (collision.CompareTag("Player")) {
-            LevelManager.s_instance.changeEnemySprite(backViewSprite);
-            LevelManager.s_instance.changeLevelState(LevelState.Dodging);
+            LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
+            LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
         }
     }
 
@@ -64,7 +67,6 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void move() {
-       
         navMeshAgent.SetDestination(player.position);
     }
 
@@ -92,13 +94,13 @@ public class EnemyController : MonoBehaviour {
         m_movementSpeed = movementSpeed;
         spriteRenderer.color = Color.white;
     }
-    
+
     public void ChanceState(EnemyState newState) {
         enemyState = newState;
     }
 }
 
-public enum EnemyState{
+public enum EnemyState {
     chasing,
     patroling
 }
