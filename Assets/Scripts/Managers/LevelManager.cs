@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
     public static LevelManager s_instance;
@@ -57,6 +58,7 @@ public class LevelManager : MonoBehaviour {
         playerPos = PlayerManager.instance.transform.position;
         SafeSpecialEnemiesPositions();
         SafeEnemiesPositions();
+        SceneManager.LoadScene("Level_2");
         //Cambiar de escena
     }
 
@@ -73,6 +75,8 @@ public class LevelManager : MonoBehaviour {
             enemiesPositions.Add(enemy.transform.position);
         }
     }
+
+    public Sprite getSprite() { return enemySprite; }
 }
 
 public enum LevelState {

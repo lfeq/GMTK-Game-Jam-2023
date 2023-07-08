@@ -29,6 +29,7 @@ public class CaughtInBall : MonoBehaviour
             PlayerControllerBattle.instance.isInBall = false;
             PlayerControllerBattle.instance.spriteRenderer.enabled = true;
             Destroy(gameObject);
+
         }
 
         if(!hasEscaped && !hasLost) {
