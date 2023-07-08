@@ -1,18 +1,20 @@
 using UnityEngine;
 
-
 public class PlayerControllerBattle : MonoBehaviour {
     public static PlayerControllerBattle instance;
     public bool playerInPosition = false;
+    [HideInInspector]
+    public bool isInBall;
 
     [SerializeField] float speed = 1;
     [SerializeField] GameObject catchingBall;
 
     Rigidbody2D rgbd;
     Animator animator;
+    [HideInInspector]
     public SpriteRenderer spriteRenderer;
     bool axisPressed;
-   
+    float xMove;
 
     private void Awake() {
         instance = this;
@@ -29,14 +31,13 @@ public class PlayerControllerBattle : MonoBehaviour {
     }
 
     void movePlayer() {
-  
-        float xMove;
-        
         if(PlayerManager.instance.getPlayerState() == PlayerState.DeadState) {
             return;
         }
 
-        xMove = Input.GetAxisRaw("Horizontal") * speed;
+        if(!isInBall) {
+            xMove = Input.GetAxisRaw("Horizontal") * speed;
+        }
 
         if(xMove == 0) {
             axisPressed = false;
