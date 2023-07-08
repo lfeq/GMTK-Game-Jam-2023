@@ -305,6 +305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catchingBall: {fileID: 8502714796350233836, guid: 97756177b3c0fb9488f36df5fe3cad0d, type: 3}
+  canShoot: 0
+  timer: 5
 --- !u!1 &1655086808
 GameObject:
   m_ObjectHideFlags: 0
@@ -405,8 +407,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228f0237b71aa024886bb70c7912e4b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
+  speed: 5
   playerInPosition: 1
+  canMove: 0
 --- !u!114 &1655086812
 MonoBehaviour:
   m_ObjectHideFlags: 0
