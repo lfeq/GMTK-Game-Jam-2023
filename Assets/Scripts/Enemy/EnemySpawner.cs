@@ -7,7 +7,6 @@ public class EnemySpawner : MonoBehaviour {
     private float timer;
 
     private void Start() {
-        EnemyManager.instance.AddEnemySpawn(this);
         timer = spawnTimeInSeconds;
     }
 

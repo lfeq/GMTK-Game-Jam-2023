@@ -169,9 +169,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 149b9100402ce4148821c14a573f01ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
+  movementSpeed: 2
   slowedColor: {r: 0, g: 1, b: 0, a: 1}
   backViewSprite: {fileID: -706063812, guid: 6bd7e4d4b5731e740ab765b13b30e591, type: 3}
+  enemyState: 1
+  movementPoints: []
+  minimalDistance: 0
 --- !u!195 &-5231697089563528209
 NavMeshAgent:
   m_ObjectHideFlags: 0
