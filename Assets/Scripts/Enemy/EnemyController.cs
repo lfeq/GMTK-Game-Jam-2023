@@ -49,6 +49,7 @@ public class EnemyController : MonoBehaviour {
         m_movementSpeed *= movementSpeed / 2;
         isSlowed = true;
         spriteRenderer.color = slowedColor;
+        StartCoroutine(StopSlow());
     }
 
     private IEnumerator StopSlow() {
