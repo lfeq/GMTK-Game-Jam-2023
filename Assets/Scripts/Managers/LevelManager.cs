@@ -5,6 +5,7 @@ public class LevelManager : MonoBehaviour {
 
     private LevelState m_levelState;
     private Sprite enemySprite;
+    private Vector2 playerPos;
 
     private void Awake() {
         if (s_instance != null && s_instance != this) {
@@ -19,7 +20,7 @@ public class LevelManager : MonoBehaviour {
         GameManager.s_instance.changeGameSate(GameState.Playing);
     }
 
-    public void changeLevelState(LevelState t_levelState) {
+    public void ChangeLevelState(LevelState t_levelState) {
         if (t_levelState == m_levelState) {
             return;
         }
@@ -29,24 +30,30 @@ public class LevelManager : MonoBehaviour {
                 //Cambiar a escena de persecucion
                 break;
             case LevelState.Dodging:
-                //Cambiar a escena de atrapar
+                ChangeDodgeScene();
                 break;
             default:
                 throw new UnityException("Invalid Levela State");
         }
     }
 
-    public void restartLevel() {
+    public void RestartLevel() {
         GameManager.s_instance.changeGameSate(GameState.RestartLevel);
     }
 
-    public void returnToMenu() {
+    public void ReturnToMenu() {
         GameManager.s_instance.changeGameSate(GameState.LoadMainMenu);
         Destroy(gameObject);
     }
 
-    public void changeEnemySprite(Sprite t_enemySprite) {
+    public void ChangeEnemySprite(Sprite t_enemySprite) {
         enemySprite = t_enemySprite;
+    }
+
+    private void ChangeDodgeScene() {
+        playerPos = PlayerManager.instance.transform.position;
+        //Guardar ubicacion de enemigos
+        //Cambiar de escena
     }
 }
 
