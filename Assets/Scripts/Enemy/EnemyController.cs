@@ -28,9 +28,8 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Update() {
-        navMeshAgent.SetDestination(player.position);
-        //move();
-        //lookAtPlayer();
+        move();
+        lookAtPlayer();
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -51,8 +50,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void move() {
-        float step = m_movementSpeed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, player.position, step);
+        navMeshAgent.SetDestination(player.position);
     }
 
     private void Slow() {

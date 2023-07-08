@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5347773604210054609}
   - component: {fileID: 6996525585649656600}
   - component: {fileID: 5473398236398661663}
+  - component: {fileID: 9072581440257816832}
   m_Layer: 0
   m_Name: Knight
   m_TagString: Enemy
@@ -171,3 +172,25 @@ MonoBehaviour:
   movementSpeed: 2
   slowedColor: {r: 0, g: 1, b: 0, a: 1}
   backViewSprite: {fileID: 1601716138, guid: 6caa8c215b006cd458f5746a34beff80, type: 3}
+--- !u!195 &9072581440257816832
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5473398236398661635}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1
+  m_BaseOffset: 0.5
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
