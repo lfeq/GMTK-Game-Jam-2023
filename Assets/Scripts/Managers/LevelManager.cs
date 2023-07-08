@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour {
     public static LevelManager s_instance;
@@ -30,6 +31,7 @@ public class LevelManager : MonoBehaviour {
         m_levelState = t_levelState;
         switch (m_levelState) {
             case LevelState.Escaping:
+                ChangeEscapingScene();
                 //Cambiar a escena de persecucion
                 break;
             case LevelState.Dodging:
@@ -38,6 +40,10 @@ public class LevelManager : MonoBehaviour {
             default:
                 throw new UnityException("Invalid Levela State");
         }
+    }
+
+    void ChangeEscapingScene() {
+        SceneManager.LoadScene("Copia_Level_1_Test"); // Escena temporal
     }
 
     public void RestartLevel() {
@@ -57,6 +63,7 @@ public class LevelManager : MonoBehaviour {
         playerPos = PlayerManager.instance.transform.position;
         SafeSpecialEnemiesPositions();
         SafeEnemiesPositions();
+        SceneManager.LoadScene("Level_2");
         //Cambiar de escena
     }
 
@@ -73,6 +80,8 @@ public class LevelManager : MonoBehaviour {
             enemiesPositions.Add(enemy.transform.position);
         }
     }
+
+    public Sprite getSprite() { return enemySprite; }
 }
 
 public enum LevelState {
