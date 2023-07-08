@@ -1,11 +1,18 @@
 using UnityEngine;
 
-public class PlayerControllerBattle : MonoBehaviour
-{
+public class PlayerControllerBattle : MonoBehaviour {
+    public static PlayerControllerBattle instance;
+
     [SerializeField] float speed = 1;
     Rigidbody2D rgbd;
     Animator animator;
     bool axisPressed;
+    public bool playerInPosition = false;
+    public bool canMove;
+
+    private void Awake() {
+        instance = this;
+    }
 
     private void Start() {
         rgbd = GetComponent<Rigidbody2D>();
@@ -33,14 +40,14 @@ public class PlayerControllerBattle : MonoBehaviour
         if(xMove < 0 && transform.position.x > -speed) {
             if(axisPressed == false) {
                 axisPressed = true;
-                transform.position =  new Vector3 (transform.position.x + xMove, 0, 0);
+                transform.position =  new Vector2 (transform.position.x + xMove, transform.position.y);
             }
         }
 
         if(xMove > 0 && transform.position.x < speed) {
             if(axisPressed == false) {
                 axisPressed = true;
-                transform.position = new Vector3(transform.position.x + xMove, 0, 0);
+                transform.position = new Vector2 (transform.position.x + xMove, transform.position.y);
             }
         }
 
@@ -48,3 +55,4 @@ public class PlayerControllerBattle : MonoBehaviour
         Debug.Log("position: " + transform.position);
     }
 }
+
