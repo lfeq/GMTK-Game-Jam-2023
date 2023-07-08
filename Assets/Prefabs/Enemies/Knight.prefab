@@ -75,9 +75,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1959390713
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1585653666, guid: 6caa8c215b006cd458f5746a34beff80, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -172,6 +172,9 @@ MonoBehaviour:
   movementSpeed: 2
   slowedColor: {r: 0, g: 1, b: 0, a: 1}
   backViewSprite: {fileID: 1601716138, guid: 6caa8c215b006cd458f5746a34beff80, type: 3}
+  enemyState: 0
+  movementPoints: []
+  minimalDistance: 0
 --- !u!195 &9072581440257816832
 NavMeshAgent:
   m_ObjectHideFlags: 0
