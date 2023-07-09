@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -43,8 +42,8 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    private void ChangeEscapingScene() {
-        StartCoroutine(loadScene("Copia_Level_1_Test")); // Escena temporal
+    void ChangeEscapingScene() {
+        SceneManager.LoadScene("Copia_Level_1_Test"); // Escena temporal
     }
 
     public void RestartLevel() {
@@ -60,23 +59,12 @@ public class LevelManager : MonoBehaviour {
         enemySprite = t_enemySprite;
     }
 
-    public Sprite getSprite() {
-        return enemySprite;
-    }
-
-    public void ResetPositions() {
-        EnemyManager.instance.SetSpecialEnemiesPositions(specialEnemiesPositions);
-        EnemyManager.instance.SetEnemiesPositions(enemiesPositions);
-        PlayerManager.instance.transform.position = playerPos;
-        specialEnemiesPositions.Clear();
-        enemiesPositions.Clear();
-    }
-
     private void ChangeDodgeScene() {
         playerPos = PlayerManager.instance.transform.position;
         SafeSpecialEnemiesPositions();
         SafeEnemiesPositions();
         SceneManager.LoadScene("Level_2");
+        //Cambiar de escena
     }
 
     private void SafeSpecialEnemiesPositions() {
@@ -93,13 +81,7 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    private IEnumerator loadScene(string sceneName) {
-        var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
-        while (!asyncLoadLevel.isDone) {
-            yield return null;
-        }
-        ResetPositions();
-    }
+    public Sprite getSprite() { return enemySprite; }
 }
 
 public enum LevelState {
