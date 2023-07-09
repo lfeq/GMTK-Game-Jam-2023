@@ -7,7 +7,7 @@ public class EnemySpawner : MonoBehaviour {
     private float timer;
 
     private void Start() {
-        timer = spawnTimeInSeconds;
+        timer = 3;
     }
 
     private void Update() {
