@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class MoveCatchingBall : MonoBehaviour
@@ -22,7 +23,7 @@ public class MoveCatchingBall : MonoBehaviour
         int randomPos = Random.Range(0, positionsArray.Length);
         randomPlayerPosition = positionsArray[randomPos];
         setTimeCaught(LevelManager.s_instance.getTimesCaught());
-        isBallLaunched=true;
+        StartCoroutine(lastChanceToDodgeBall());
     }
 
     private void FixedUpdate() {
@@ -57,5 +58,10 @@ public class MoveCatchingBall : MonoBehaviour
 
     public void setIsBallLaunched(bool t_isBallLaunched) {
         isBallLaunched = t_isBallLaunched;
+    }
+
+    IEnumerator lastChanceToDodgeBall() {
+        yield return new WaitForSeconds(0.5f);
+        isBallLaunched = true;
     }
 }
