@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour {
                 restartLevel();
                 break;
             case GameState.GameOver:
+                gameOver();
                 break;
             case GameState.Credits:
                 credits();
@@ -78,6 +79,10 @@ public class GameManager : MonoBehaviour {
     }
     public void credits(){
         SceneManager.LoadScene("Credits");
+    }
+
+    public void gameOver() {
+        SceneManager.LoadScene("GameOver");
     }
     private void restartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
