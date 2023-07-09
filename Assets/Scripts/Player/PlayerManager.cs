@@ -1,12 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerManager : MonoBehaviour {
     public static PlayerManager instance;
+
+    [SerializeField] private AudioClip pickupAudioClip;
 
     private PlayerState playerState;
     private Animator animator;
     private List<int> pickedFruits = new List<int>();
+    private AudioSource audioSource;
 
     private void Awake() {
         instance = this;
@@ -15,6 +19,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void Start() {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
         SetPickedFruitsList(LevelManager.s_instance.GetPickedFruits());
     }
 
@@ -88,6 +93,8 @@ public class PlayerManager : MonoBehaviour {
             ManagerCollectorFrut.instance.getFruits(4);
             pickedFruits.Add(4);
         }
+        audioSource.clip = pickupAudioClip;
+        audioSource.Play();
     }
 }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
+[RequireComponent(typeof(AudioSource))]
 public class EnemyController : MonoBehaviour {
     [SerializeField] private float movementSpeed;
     [SerializeField] private Color slowedColor = Color.green;
@@ -9,6 +10,8 @@ public class EnemyController : MonoBehaviour {
     [SerializeField] private EnemyState enemyState;
     [SerializeField] private Transform[] movementPoints;
     [SerializeField] private float minimalDistance;
+    [SerializeField] private AudioClip hitProjectileAudioClip;
+    [SerializeField] private AudioClip hitPlayerAudioClip;
 
     private Transform player;
     private Animator animator;
@@ -18,6 +21,7 @@ public class EnemyController : MonoBehaviour {
     private NavMeshAgent navMeshAgent;
     private int randomNumber;
     private bool stopAttack;
+    private AudioSource audioSource;
 
     private void Awake() {
         if (navMeshAgent == null) {
@@ -33,6 +37,7 @@ public class EnemyController : MonoBehaviour {
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         navMeshAgent.speed = m_movementSpeed;
+        audioSource = GetComponent<AudioSource>();
         if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
@@ -55,6 +60,8 @@ public class EnemyController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Projectile")) {
+            audioSource.clip = hitProjectileAudioClip;
+            audioSource.Play();
             Slow();
         }
     }
@@ -66,6 +73,8 @@ public class EnemyController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player")) {
             LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
             LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
+            audioSource.clip = hitPlayerAudioClip;
+            audioSource.Play();
         }
     }
 
