@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -32,7 +33,6 @@ public class LevelManager : MonoBehaviour {
         switch (m_levelState) {
             case LevelState.Escaping:
                 ChangeEscapingScene();
-                //Cambiar a escena de persecucion
                 break;
             case LevelState.Dodging:
                 ChangeDodgeScene();
@@ -43,7 +43,7 @@ public class LevelManager : MonoBehaviour {
     }
 
     private void ChangeEscapingScene() {
-        SceneManager.LoadScene("Level_1");
+        StartCoroutine(loadScene("Level_1"));
     }
 
     public void RestartLevel() {
@@ -57,6 +57,14 @@ public class LevelManager : MonoBehaviour {
 
     public void ChangeEnemySprite(Sprite t_enemySprite) {
         enemySprite = t_enemySprite;
+    }
+
+    private void ResetPositions() {
+        EnemyManager.instance.SetSpecialEnemiesPositions(specialEnemiesPositions);
+        EnemyManager.instance.SetEnemiesPositions(enemiesPositions);
+        PlayerManager.instance.transform.position = playerPos;
+        specialEnemiesPositions.Clear();
+        enemiesPositions.Clear();
     }
 
     private void ChangeDodgeScene() {
@@ -83,6 +91,14 @@ public class LevelManager : MonoBehaviour {
 
     public Sprite getSprite() {
         return enemySprite;
+    }
+
+    private IEnumerator loadScene(string sceneName) {
+        var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        while (!asyncLoadLevel.isDone) {
+            yield return null;
+        }
+        ResetPositions();
     }
 }
 
