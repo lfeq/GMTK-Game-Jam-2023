@@ -20,10 +20,14 @@ public class MoveCatchingBall : MonoBehaviour {
         positionsArray[2] = new Vector2(5f, 2.5f);
     }
 
+    
+
     private void Start() {
         int randomPos = Random.Range(0, positionsArray.Length);
         randomPlayerPosition = positionsArray[randomPos];
         setTimeCaught(LevelManager.s_instance.getTimesCaught());
+        ballSpeed += timesCaught;
+        Debug.Log("Times caught: " +  timesCaught);
     }
 
     private void FixedUpdate() {
@@ -32,9 +36,7 @@ public class MoveCatchingBall : MonoBehaviour {
         if (Vector2.Distance(transform.position, randomPlayerPosition) < 0.1f) {
             isBallLaunched = false;
             Destroy(gameObject);
-        }
-
-        Debug.Log("ball speed: " + ballSpeed);
+        } 
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -50,9 +52,10 @@ public class MoveCatchingBall : MonoBehaviour {
     }
 
     private void setBallSpeedAndLaunch() {
-        setTimeCaught(LevelManager.s_instance.getTimesCaught());
+        //setTimeCaught(LevelManager.s_instance.getTimesCaught());
         StartCoroutine(lastChanceToDodgeBall());
-        transform.position = Vector2.MoveTowards(transform.position, randomPlayerPosition, (ballSpeed + timesCaught) * Time.deltaTime);
+        transform.position = Vector2.MoveTowards(transform.position, randomPlayerPosition, ballSpeed * Time.deltaTime);
+        Debug.Log("ball speed: " + ballSpeed);
     }
 
     public bool getIsBallLaunched() {
