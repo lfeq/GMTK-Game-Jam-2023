@@ -80,21 +80,29 @@ public class PlayerManager : MonoBehaviour {
         if (collision.CompareTag("Fruta_1")) {
             ManagerCollectorFrut.instance.getFruits(0);
             pickedFruits.Add(0);
+            audioSource.clip = pickupAudioClip;
+            audioSource.Play();
         } else if (collision.CompareTag("Fruta_2")) {
             ManagerCollectorFrut.instance.getFruits(1);
             pickedFruits.Add(1);
+            audioSource.clip = pickupAudioClip;
+            audioSource.Play();
         } else if (collision.CompareTag("Fruta_3")) {
             ManagerCollectorFrut.instance.getFruits(2);
             pickedFruits.Add(2);
+            audioSource.clip = pickupAudioClip;
+            audioSource.Play();
         } else if (collision.CompareTag("Fruta_4")) {
             ManagerCollectorFrut.instance.getFruits(3);
             pickedFruits.Add(3);
+            audioSource.clip = pickupAudioClip;
+            audioSource.Play();
         } else if (collision.CompareTag("Fruta_5")) {
             ManagerCollectorFrut.instance.getFruits(4);
             pickedFruits.Add(4);
+            audioSource.clip = pickupAudioClip;
+            audioSource.Play();
         }
-        audioSource.clip = pickupAudioClip;
-        audioSource.Play();
     }
 }
 

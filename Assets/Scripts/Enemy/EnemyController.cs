@@ -22,7 +22,6 @@ public class EnemyController : MonoBehaviour {
     private int randomNumber;
     private bool stopAttack;
     private AudioSource audioSource;
-   
 
     private void Awake() {
         if (navMeshAgent == null) {
@@ -42,7 +41,7 @@ public class EnemyController : MonoBehaviour {
         if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
-       
+        transform.rotation = Quaternion.identity;
     }
 
     private void Update() {
@@ -74,7 +73,8 @@ public class EnemyController : MonoBehaviour {
         }
         if (collision.gameObject.CompareTag("Player")) {
             LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
-            LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
+            TransitionManager.instance.StartTransition();
+            //LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
             audioSource.clip = hitPlayerAudioClip;
             audioSource.Play();
         }
