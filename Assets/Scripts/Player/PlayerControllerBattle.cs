@@ -47,20 +47,28 @@ public class PlayerControllerBattle : MonoBehaviour {
         }
 
         if(xMove < 0 && transform.position.x > -speed) {
+            if(MoveCatchingBall.instance != null) {
+                return;
+            }
             if(axisPressed == false) {
                 axisPressed = true;
+                //MoveCatchingBall.instance.setIsBallLaunched(false);
                 transform.position =  new Vector2 (transform.position.x + xMove, transform.position.y);
             }
+            
         }
 
         if(xMove > 0 && transform.position.x < speed) {
+            if(MoveCatchingBall.instance != null) {
+                return;
+            }
             if(axisPressed == false) {
                 axisPressed = true;
+                //MoveCatchingBall.instance.setIsBallLaunched(false);
                 transform.position = new Vector2 (transform.position.x + xMove, transform.position.y);
             }
+            
         }
-        //Debug.Log("horizontal value: " + xMove);
-        //Debug.Log("position: " + transform.position);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
