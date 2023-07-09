@@ -7,6 +7,7 @@ public class MainMenuManager : MonoBehaviour {
     private bool skipedCover = false;
 
     private void Start() {
+        MusicManager.s_instance.PlayLevelMusic(levelMusic);
     }
 
     private void Update() {
