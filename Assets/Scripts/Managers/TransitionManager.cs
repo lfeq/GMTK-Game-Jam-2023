@@ -24,4 +24,8 @@ public class TransitionManager : MonoBehaviour {
     public void ChangeToPlayingScene() {
         GameManager.s_instance.changeGameSate(GameState.LoadLevel);
     }
+
+    public void ChangeToPlayingScene2() {
+        LevelManager.s_instance.ChangeLevelState(LevelState.Escaping);
+    }
 }
