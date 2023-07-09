@@ -46,6 +46,8 @@ public class LevelManager : MonoBehaviour {
                 ChangeDodgeScene();
                 MusicManager.s_instance.PlayLevelMusic(battleMusic);
                 break;
+            case LevelState.LoadingScene:
+                break;
             default:
                 throw new UnityException("Invalid Levela State");
         }
@@ -134,5 +136,6 @@ public class LevelManager : MonoBehaviour {
 
 public enum LevelState {
     Escaping,
-    Dodging
+    Dodging,
+    LoadingScene
 }

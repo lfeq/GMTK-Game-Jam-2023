@@ -21,7 +21,10 @@ public class ProjectileMovement : MonoBehaviour {
     }
 
     private void FixedUpdate() {
-        rb2d.velocity = moveDirection * moveSpeed;
+        if (LevelManager.s_instance.getLevelState() == LevelState.LoadingScene) {
+            return;
+        }
+        rb2d.velocity = moveDirection.normalized * moveSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {

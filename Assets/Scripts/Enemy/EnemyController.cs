@@ -45,6 +45,10 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Update() {
+        if (LevelManager.s_instance.getLevelState() == LevelState.LoadingScene) {
+            navMeshAgent.speed = 0;
+            return;
+        }
         if (stopAttack) {
             return;
         }
