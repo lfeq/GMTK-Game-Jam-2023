@@ -4,7 +4,7 @@ using UnityEngine;
 public class MoveCatchingBall : MonoBehaviour {
     public static MoveCatchingBall instance;
 
-    [SerializeField] private float ballSpeed = 3f;
+    [SerializeField] private float ballSpeed = 6f;
     private int timesCaught = 0;
 
     //private Vector2 playerPosition;
@@ -33,6 +33,8 @@ public class MoveCatchingBall : MonoBehaviour {
             isBallLaunched = false;
             Destroy(gameObject);
         }
+
+        Debug.Log("ball speed: " + ballSpeed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
@@ -48,6 +50,7 @@ public class MoveCatchingBall : MonoBehaviour {
     }
 
     private void setBallSpeedAndLaunch() {
+        setTimeCaught(LevelManager.s_instance.getTimesCaught());
         StartCoroutine(lastChanceToDodgeBall());
         transform.position = Vector2.MoveTowards(transform.position, randomPlayerPosition, (ballSpeed + timesCaught) * Time.deltaTime);
     }

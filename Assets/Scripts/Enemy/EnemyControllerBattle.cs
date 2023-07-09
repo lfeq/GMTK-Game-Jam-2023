@@ -7,7 +7,9 @@ public class EnemyControllerBattle : MonoBehaviour
     [SerializeField] GameObject catchingBall;
     public bool canShoot;
     [SerializeField] float timer = 3f;
-    float setTime;
+    private float setTime;
+    private int throwBallCounter = 0;
+
    
     private void Awake() {
         instance = this;
@@ -22,12 +24,17 @@ public class EnemyControllerBattle : MonoBehaviour
     private void Update() {
         timer -= Time.deltaTime;
         if (timer < 0 && canShoot) {
-            tryToCatch();
+            throwBallCounter++;
             timer = setTime;
+            tryToCatch();
         }
     }
 
     void tryToCatch() {
+        if(throwBallCounter > 5) {
+            LevelManager.s_instance.ChangeLevelState(LevelState.LoadingScene);
+            TransitionManager.instance.StartTransition();
+        }
         float catchingBallSpeed = 10f * Time.deltaTime;
         GameObject ball = Instantiate(catchingBall, transform.position, Quaternion.identity);
     }
