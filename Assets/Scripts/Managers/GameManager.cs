@@ -46,6 +46,9 @@ public class GameManager : MonoBehaviour {
             case GameState.Credits:
                 credits();
                 break;
+            case GameState.Win:
+                win();
+                break;
             case GameState.QuitGame:
                 quitGame();
                 break;
@@ -84,6 +87,9 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("Level_1");
     }
 
+    public void win() {
+        SceneManager.LoadScene("Win");
+    }
     private void quitGame() {
         Application.Quit();
     }
@@ -99,5 +105,6 @@ public enum GameState {
     RestartLevel,
     GameOver,
     Credits,
+    Win,
     QuitGame,
 }
