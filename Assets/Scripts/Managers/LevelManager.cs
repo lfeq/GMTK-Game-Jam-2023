@@ -42,8 +42,8 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    void ChangeEscapingScene() {
-        SceneManager.LoadScene("Copia_Level_1_Test"); // Escena temporal
+    private void ChangeEscapingScene() {
+        SceneManager.LoadScene("Level_1");
     }
 
     public void RestartLevel() {
@@ -81,7 +81,9 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public Sprite getSprite() { return enemySprite; }
+    public Sprite getSprite() {
+        return enemySprite;
+    }
 }
 
 public enum LevelState {
