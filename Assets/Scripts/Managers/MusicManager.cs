@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class MusicManager : MonoBehaviour {
     public static MusicManager s_instance;
@@ -6,7 +7,9 @@ public class MusicManager : MonoBehaviour {
     private AudioSource EscapingAudioClip;
     private AudioSource BattleAudioClip;
     private AudioSource audioSource;
-    private AudioClip[] levelMusic;
+    private LevelState levelState;
+    [SerializeField] private AudioClip[] levelMusic;
+
 
     private void Awake() {
         if (s_instance != null && s_instance != this) {
@@ -16,7 +19,7 @@ public class MusicManager : MonoBehaviour {
         DontDestroyOnLoad(gameObject);
         s_instance = this;
         audioSource = GetComponent<AudioSource>();
-        // m_gameState = GameState.None;
+
     }
 
     public void PlayLevelMusic(AudioClip[] t_levelMusic) {

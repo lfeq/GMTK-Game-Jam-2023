@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour {
     private List<Vector2> specialEnemiesPositions = new List<Vector2>();
     private List<Vector2> enemiesPositions = new List<Vector2>();
     private bool isReloadingLevel = false;
+    [SerializeField] private AudioClip[] battleMusic;
+    [SerializeField] private AudioClip[] escapingMusic;
 
     private void Awake() {
         if (s_instance != null && s_instance != this) {
@@ -34,9 +36,11 @@ public class LevelManager : MonoBehaviour {
         switch (m_levelState) {
             case LevelState.Escaping:
                 ChangeEscapingScene();
+                MusicManager.s_instance.PlayLevelMusic(escapingMusic);
                 break;
             case LevelState.Dodging:
                 ChangeDodgeScene();
+                MusicManager.s_instance.PlayLevelMusic(battleMusic);
                 break;
             default:
                 throw new UnityException("Invalid Levela State");
@@ -105,6 +109,8 @@ public class LevelManager : MonoBehaviour {
         }
         //ResetPositions();
     }
+
+    public LevelState getLevelState() { return m_levelState; }
 }
 
 public enum LevelState {
