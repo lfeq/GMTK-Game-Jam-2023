@@ -1,14 +1,15 @@
 using System.Collections;
 using UnityEngine;
 
-public class MoveCatchingBall : MonoBehaviour
-{
-   public static MoveCatchingBall instance;
+public class MoveCatchingBall : MonoBehaviour {
+    public static MoveCatchingBall instance;
 
     [SerializeField] private float ballSpeed = 3f;
     private int timesCaught = 0;
+
     //private Vector2 playerPosition;
     private bool isBallLaunched = false;
+
     private Vector2[] positionsArray = new Vector2[3];
     private Vector2 randomPlayerPosition;
 
@@ -39,26 +40,28 @@ public class MoveCatchingBall : MonoBehaviour
         Destroy(gameObject);
     }
 
-    void setTimeCaught(int t_timeCaught) {
-        if(t_timeCaught == 0) {
+    private void setTimeCaught(int t_timeCaught) {
+        if (t_timeCaught == 0) {
             return;
         }
         timesCaught = t_timeCaught;
     }
 
-    void setBallSpeedAndLaunch() {
+    private void setBallSpeedAndLaunch() {
         StartCoroutine(lastChanceToDodgeBall());
         transform.position = Vector2.MoveTowards(transform.position, randomPlayerPosition, (ballSpeed + timesCaught) * Time.deltaTime);
     }
 
-    public bool getIsBallLaunched() { return isBallLaunched; }
+    public bool getIsBallLaunched() {
+        return isBallLaunched;
+    }
 
     public void setIsBallLaunched(bool t_isBallLaunched) {
         isBallLaunched = t_isBallLaunched;
     }
 
-    IEnumerator lastChanceToDodgeBall() {
-        yield return new WaitForSeconds(0.5f);
+    private IEnumerator lastChanceToDodgeBall() {
+        yield return new WaitForSeconds(.4f);
         isBallLaunched = true;
     }
 }
