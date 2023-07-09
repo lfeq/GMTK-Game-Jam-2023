@@ -20,7 +20,8 @@ public class ManagerCollectorFrut : MonoBehaviour {
 
     private void WinCondition() {
         if (fruts >= 5) {
-            canvasWin.SetActive(true);
+            //canvasWin.SetActive(true);
+            GameManager.s_instance.changeGameSate(GameState.Win);
         }
     }
 
