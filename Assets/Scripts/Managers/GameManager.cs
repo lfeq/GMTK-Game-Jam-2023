@@ -43,12 +43,14 @@ public class GameManager : MonoBehaviour {
                 break;
             case GameState.GameOver:
                 gameOver();
+                Destroy(LevelManager.s_instance.gameObject);
                 break;
             case GameState.Credits:
                 credits();
                 break;
             case GameState.Win:
                 win();
+                Destroy(LevelManager.s_instance.gameObject);
                 break;
             case GameState.QuitGame:
                 quitGame();
