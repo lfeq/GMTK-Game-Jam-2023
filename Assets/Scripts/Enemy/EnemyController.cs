@@ -22,6 +22,7 @@ public class EnemyController : MonoBehaviour {
     private int randomNumber;
     private bool stopAttack;
     private AudioSource audioSource;
+   
 
     private void Awake() {
         if (navMeshAgent == null) {
@@ -41,6 +42,7 @@ public class EnemyController : MonoBehaviour {
         if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
+       
     }
 
     private void Update() {
