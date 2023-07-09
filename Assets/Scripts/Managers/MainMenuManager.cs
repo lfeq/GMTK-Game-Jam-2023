@@ -29,4 +29,8 @@ public class MainMenuManager : MonoBehaviour {
 
         GameManager.s_instance.changeGameSate(GameState.HowToPlay);
     }
+
+    public void Credits() {
+        GameManager.s_instance.changeGameSate(GameState.Credits);
+    }
 }
