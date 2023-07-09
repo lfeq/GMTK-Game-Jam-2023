@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MainMenuManager : MonoBehaviour {
     [SerializeField] private GameObject coverGameObject;
+    [SerializeField] private AudioClip[] levelMusic;
 
     private bool skipedCover = false;
 
