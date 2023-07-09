@@ -8,8 +8,7 @@ public class EnemyControllerBattle : MonoBehaviour
     public bool canShoot;
     [SerializeField] float timer = 3f;
     float setTime;
-    
-
+   
     private void Awake() {
         instance = this;
     }

@@ -13,6 +13,7 @@ public class LevelManager : MonoBehaviour {
     private List<Vector2> enemiesPositions = new List<Vector2>();
     private bool isReloadingLevel = false;
     private List<int> pickedFruits = new List<int>();
+    private int timesCaught = 0;
 
     [SerializeField] private AudioClip[] battleMusic;
     [SerializeField] private AudioClip[] escapingMusic;
@@ -80,6 +81,14 @@ public class LevelManager : MonoBehaviour {
 
     public List<int> GetPickedFruits() {
         return pickedFruits;
+    }
+
+    public int getTimesCaught() {
+        return timesCaught;
+    }
+
+    public void setTimesCaught(int t_timesCaught) {
+        timesCaught = t_timesCaught;
     }
 
     private void ChangeDodgeScene() {
