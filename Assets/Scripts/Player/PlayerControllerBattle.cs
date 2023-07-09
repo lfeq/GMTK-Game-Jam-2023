@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class PlayerControllerBattle : MonoBehaviour {
@@ -47,27 +48,39 @@ public class PlayerControllerBattle : MonoBehaviour {
         }
 
         if(xMove < 0 && transform.position.x > -speed) {
-            if(MoveCatchingBall.instance != null) {
-                return;
+            if(MoveCatchingBall.instance == null) {
+                if (axisPressed == false) {
+                    axisPressed = true;
+                    //MoveCatchingBall.instance.setIsBallLaunched(false);
+                    transform.position = new Vector2(transform.position.x + xMove, transform.position.y);
+                }
+            } else {
+                if (!MoveCatchingBall.instance.getIsBallLaunched()) {
+                    if (axisPressed == false) {
+                        axisPressed = true;
+                        //MoveCatchingBall.instance.setIsBallLaunched(false);
+                        transform.position = new Vector2(transform.position.x + xMove, transform.position.y);
+                    }
+                }
             }
-            if(axisPressed == false) {
-                axisPressed = true;
-                //MoveCatchingBall.instance.setIsBallLaunched(false);
-                transform.position =  new Vector2 (transform.position.x + xMove, transform.position.y);
-            }
-            
         }
 
         if(xMove > 0 && transform.position.x < speed) {
-            if(MoveCatchingBall.instance != null) {
-                return;
+            if (MoveCatchingBall.instance == null) {
+                if (axisPressed == false) {
+                    axisPressed = true;
+                    //MoveCatchingBall.instance.setIsBallLaunched(false);
+                    transform.position = new Vector2(transform.position.x + xMove, transform.position.y);
+                }
+            } else {
+                if (!MoveCatchingBall.instance.getIsBallLaunched()) {
+                    if (axisPressed == false) {
+                        axisPressed = true;
+                        //MoveCatchingBall.instance.setIsBallLaunched(false);
+                        transform.position = new Vector2(transform.position.x + xMove, transform.position.y);
+                    }
+                }
             }
-            if(axisPressed == false) {
-                axisPressed = true;
-                //MoveCatchingBall.instance.setIsBallLaunched(false);
-                transform.position = new Vector2 (transform.position.x + xMove, transform.position.y);
-            }
-            
         }
     }
 
@@ -79,7 +92,6 @@ public class PlayerControllerBattle : MonoBehaviour {
         EnemyControllerBattle.instance.canShoot = false;
 
     }
-
     bool canEscapeFromBall() {
         return false;
     }

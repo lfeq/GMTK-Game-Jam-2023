@@ -23,13 +23,10 @@ public class MoveCatchingBall : MonoBehaviour
         int randomPos = Random.Range(0, positionsArray.Length);
         randomPlayerPosition = positionsArray[randomPos];
         setTimeCaught(LevelManager.s_instance.getTimesCaught());
-        StartCoroutine(lastChanceToDodgeBall());
     }
 
     private void FixedUpdate() {
-        if (isBallLaunched) {
-            setBallSpeedAndLaunch();
-        }
+        setBallSpeedAndLaunch();
 
         if (Vector2.Distance(transform.position, randomPlayerPosition) < 0.1f) {
             isBallLaunched = false;
@@ -50,7 +47,7 @@ public class MoveCatchingBall : MonoBehaviour
     }
 
     void setBallSpeedAndLaunch() {
-        isBallLaunched = true;
+        StartCoroutine(lastChanceToDodgeBall());
         transform.position = Vector2.MoveTowards(transform.position, randomPlayerPosition, (ballSpeed + timesCaught) * Time.deltaTime);
     }
 
