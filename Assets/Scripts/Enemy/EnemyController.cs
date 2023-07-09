@@ -20,7 +20,9 @@ public class EnemyController : MonoBehaviour {
     private bool stopAttack;
 
     private void Awake() {
-        navMeshAgent = GetComponent<NavMeshAgent>();
+        if (navMeshAgent == null) {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
     }
 
     private void Start() {
@@ -72,6 +74,9 @@ public class EnemyController : MonoBehaviour {
     }
 
     public void StopAttack() {
+        if (navMeshAgent == null) {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
         stopAttack = true;
         navMeshAgent.speed = 0;
         Slow();
@@ -90,10 +95,16 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Slow() {
+        if (navMeshAgent == null) {
+            navMeshAgent = GetComponent<NavMeshAgent>();
+        }
+        if (spriteRenderer == null) {
+            spriteRenderer = GetComponent<SpriteRenderer>();
+        }
         if (isSlowed) {
             return;
         }
-        m_movementSpeed *= movementSpeed / 2;
+        m_movementSpeed = movementSpeed / 2;
         navMeshAgent.speed = m_movementSpeed;
         isSlowed = true;
         spriteRenderer.color = slowedColor;
@@ -101,7 +112,6 @@ public class EnemyController : MonoBehaviour {
     }
 
     private void Patrol() {
-        //transform.position = Vector2.MoveTowards(transform.position, movementPoints[randomNumber].position, movementSpeed * Time.deltaTime);
         navMeshAgent.SetDestination(movementPoints[randomNumber].position);
         lookAtTarget(movementPoints[randomNumber]);
         if (Vector2.Distance(transform.position, movementPoints[randomNumber].position) < minimalDistance) {
@@ -118,7 +128,7 @@ public class EnemyController : MonoBehaviour {
     }
 
     private IEnumerator AtivateAttack() {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(3);
         stopAttack = false;
     }
 }

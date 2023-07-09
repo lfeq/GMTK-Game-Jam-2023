@@ -17,6 +17,10 @@ public class EnemyManager : MonoBehaviour {
         instance = this;
     }
 
+    private void Start() {
+        LevelManager.s_instance.ResetPositions();
+    }
+
     public void AddEnemyToList(GameObject t_enemy) {
         enemies.Add(t_enemy);
     }
