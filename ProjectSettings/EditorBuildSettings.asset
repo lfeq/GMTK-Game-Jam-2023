@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TestScenes/Copia_Level_1_Test.unity
     guid: 43848bef9c49e1341b6342723f9f1f8b
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: a133c8390acbca640978f1d6bfb2023a
   m_configObjects: {}
