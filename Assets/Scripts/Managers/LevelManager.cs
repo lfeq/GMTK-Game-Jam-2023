@@ -11,6 +11,7 @@ public class LevelManager : MonoBehaviour {
     private Vector2 playerPos;
     private List<Vector2> specialEnemiesPositions = new List<Vector2>();
     private List<Vector2> enemiesPositions = new List<Vector2>();
+    private bool isReloadingLevel = false;
 
     private void Awake() {
         if (s_instance != null && s_instance != this) {
@@ -42,8 +43,8 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    private void ChangeEscapingScene() {
-        StartCoroutine(loadScene("Level_1"));
+    public Sprite getSprite() {
+        return enemySprite;
     }
 
     public void RestartLevel() {
@@ -59,15 +60,19 @@ public class LevelManager : MonoBehaviour {
         enemySprite = t_enemySprite;
     }
 
-    private void ResetPositions() {
+    public void ResetPositions() {
+        if (!isReloadingLevel) {
+            return;
+        }
+        PlayerManager.instance.transform.position = playerPos;
         EnemyManager.instance.SetSpecialEnemiesPositions(specialEnemiesPositions);
         EnemyManager.instance.SetEnemiesPositions(enemiesPositions);
-        PlayerManager.instance.transform.position = playerPos;
         specialEnemiesPositions.Clear();
         enemiesPositions.Clear();
     }
 
     private void ChangeDodgeScene() {
+        isReloadingLevel = true;
         playerPos = PlayerManager.instance.transform.position;
         SafeSpecialEnemiesPositions();
         SafeEnemiesPositions();
@@ -89,16 +94,16 @@ public class LevelManager : MonoBehaviour {
         }
     }
 
-    public Sprite getSprite() {
-        return enemySprite;
+    private void ChangeEscapingScene() {
+        StartCoroutine(loadScene("Level_1"));
     }
 
     private IEnumerator loadScene(string sceneName) {
-        var asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        AsyncOperation asyncLoadLevel = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
         while (!asyncLoadLevel.isDone) {
             yield return null;
         }
-        ResetPositions();
+        //ResetPositions();
     }
 }
 
