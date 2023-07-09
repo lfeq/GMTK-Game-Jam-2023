@@ -1,15 +1,12 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour {
-
     public static PlayerManager instance;
 
     private PlayerState playerState;
     private Animator animator;
-
-    ManagerCollectorFrut managerCollectorFrut;
+    private List<int> pickedFruits = new List<int>();
 
     private void Awake() {
         instance = this;
@@ -18,6 +15,7 @@ public class PlayerManager : MonoBehaviour {
 
     private void Start() {
         animator = GetComponent<Animator>();
+        SetPickedFruitsList(LevelManager.s_instance.GetPickedFruits());
     }
 
     public void ChangePlayerStates(PlayerState newState) {
@@ -50,6 +48,21 @@ public class PlayerManager : MonoBehaviour {
     public PlayerState getPlayerState() {
         return playerState;
     }
+
+    public List<int> getPickedFruits() {
+        return pickedFruits;
+    }
+
+    public void SetPickedFruitsList(List<int> t_fruitList) {
+        if (t_fruitList.Count == 0) {
+            return;
+        }
+        pickedFruits = t_fruitList;
+        foreach (int fruit in pickedFruits) {
+            ManagerCollectorFrut.instance.getFruits(fruit);
+        }
+    }
+
     private void resetAnimatonParameters() {
         foreach (AnimatorControllerParameter parameter in animator.parameters) {
             if (parameter.type == AnimatorControllerParameterType.Bool) {
@@ -61,14 +74,19 @@ public class PlayerManager : MonoBehaviour {
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Fruta_1")) {
             ManagerCollectorFrut.instance.getFruits(0);
+            pickedFruits.Add(0);
         } else if (collision.CompareTag("Fruta_2")) {
             ManagerCollectorFrut.instance.getFruits(1);
+            pickedFruits.Add(1);
         } else if (collision.CompareTag("Fruta_3")) {
             ManagerCollectorFrut.instance.getFruits(2);
+            pickedFruits.Add(2);
         } else if (collision.CompareTag("Fruta_4")) {
             ManagerCollectorFrut.instance.getFruits(3);
+            pickedFruits.Add(3);
         } else if (collision.CompareTag("Fruta_5")) {
             ManagerCollectorFrut.instance.getFruits(4);
+            pickedFruits.Add(4);
         }
     }
 }

@@ -6,6 +6,9 @@ public class MainMenuManager : MonoBehaviour {
 
     private bool skipedCover = false;
 
+    private void Start() {
+    }
+
     private void Update() {
         if (skipedCover) {
             return;

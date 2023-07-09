@@ -12,6 +12,8 @@ public class LevelManager : MonoBehaviour {
     private List<Vector2> specialEnemiesPositions = new List<Vector2>();
     private List<Vector2> enemiesPositions = new List<Vector2>();
     private bool isReloadingLevel = false;
+    private List<int> pickedFruits = new List<int>();
+
     [SerializeField] private AudioClip[] battleMusic;
     [SerializeField] private AudioClip[] escapingMusic;
 
@@ -75,11 +77,16 @@ public class LevelManager : MonoBehaviour {
         enemiesPositions.Clear();
     }
 
+    public List<int> GetPickedFruits() {
+        return pickedFruits;
+    }
+
     private void ChangeDodgeScene() {
         isReloadingLevel = true;
         playerPos = PlayerManager.instance.transform.position;
         SafeSpecialEnemiesPositions();
         SafeEnemiesPositions();
+        pickedFruits = PlayerManager.instance.getPickedFruits();
         SceneManager.LoadScene("Level_2");
         //Cambiar de escena
     }
@@ -110,7 +117,9 @@ public class LevelManager : MonoBehaviour {
         //ResetPositions();
     }
 
-    public LevelState getLevelState() { return m_levelState; }
+    public LevelState getLevelState() {
+        return m_levelState;
+    }
 }
 
 public enum LevelState {
