@@ -75,6 +75,7 @@ public class CaughtInBall : MonoBehaviour {
     private void checkIfYouHaveBeenTrapped() {
         if (canvasSlider.fillAmount <= 0f) {
             hasLost = true;
+            GameManager.s_instance.changeGameSate(GameState.GameOver);
             Debug.Log("You lose");
         } else {
             if (Input.GetMouseButtonDown(0)) {
