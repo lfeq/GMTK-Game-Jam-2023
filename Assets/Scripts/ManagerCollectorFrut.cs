@@ -15,9 +15,6 @@ public class ManagerCollectorFrut : MonoBehaviour {
 
     private void Awake() {
         instance = this;
-    }
-
-    private void Start() {
         fruts = 0;
     }
 
@@ -51,6 +48,7 @@ public class ManagerCollectorFrut : MonoBehaviour {
                 break;
             default: break;
         }
+        Debug.Log("Frutitas");
         fruts++;
         WinCondition();
     }
