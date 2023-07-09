@@ -8,7 +8,7 @@ public class MusicManager : MonoBehaviour {
     private AudioSource BattleAudioClip;
     private AudioSource audioSource;
     private LevelState levelState;
-    [SerializeField] private AudioClip[] levelMusic;
+    private AudioClip[] levelMusic;
 
 
     private void Awake() {
@@ -26,5 +26,6 @@ public class MusicManager : MonoBehaviour {
         levelMusic = t_levelMusic;
         int randomSong = Random.Range(0, levelMusic.Length);
         audioSource.clip = levelMusic[randomSong];
+        audioSource.Play();
     }
 }
