@@ -170,7 +170,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 2
-  slowedColor: {r: 0, g: 1, b: 0, a: 1}
+  slowedColor: {r: 0.3099858, g: 0.8113208, b: 0.3099858, a: 1}
   backViewSprite: {fileID: -232382273, guid: fd72e330b5d0a824a83de7d9f36fb6e7, type: 3}
   enemyState: 1
   movementPoints: []

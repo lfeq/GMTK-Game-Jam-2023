@@ -17,6 +17,7 @@ public class EnemyController : MonoBehaviour {
     private SpriteRenderer spriteRenderer;
     private NavMeshAgent navMeshAgent;
     private int randomNumber;
+    private bool stopAttack;
 
     private void Awake() {
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -29,12 +30,16 @@ public class EnemyController : MonoBehaviour {
         spriteRenderer = GetComponent<SpriteRenderer>();
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
+        navMeshAgent.speed = m_movementSpeed;
         if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
     }
 
     private void Update() {
+        if (stopAttack) {
+            return;
+        }
         switch (enemyState) {
             case EnemyState.patroling:
                 Patrol();
@@ -46,17 +51,28 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
+    public void StopAttack() {
+        stopAttack = true;
+        navMeshAgent.speed = 0;
+        Slow();
+        StartCoroutine(AtivateAttack());
+    }
+
     private void OnTriggerEnter2D(Collider2D collision) {
         if (collision.CompareTag("Projectile")) {
             Slow();
         }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision) {
         if (collision.gameObject.CompareTag("Player")) {
+            if (stopAttack) {
+                return;
+            }
             LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
             LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
         }
+    }
+
+    public void ChanceState(EnemyState newState) {
+        enemyState = newState;
     }
 
     private void lookAtPlayer() {
@@ -75,6 +91,7 @@ public class EnemyController : MonoBehaviour {
             return;
         }
         m_movementSpeed *= movementSpeed / 2;
+        navMeshAgent.speed = m_movementSpeed;
         isSlowed = true;
         spriteRenderer.color = slowedColor;
         StartCoroutine(StopSlow());
@@ -92,11 +109,13 @@ public class EnemyController : MonoBehaviour {
         yield return new WaitForSeconds(4);
         isSlowed = false;
         m_movementSpeed = movementSpeed;
+        navMeshAgent.speed = m_movementSpeed;
         spriteRenderer.color = Color.white;
     }
 
-    public void ChanceState(EnemyState newState) {
-        enemyState = newState;
+    private IEnumerator AtivateAttack() {
+        yield return new WaitForSeconds(2);
+        stopAttack = false;
     }
 }
 
