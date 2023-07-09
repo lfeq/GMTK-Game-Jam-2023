@@ -37,6 +37,7 @@ public class EnemyController : MonoBehaviour {
         navMeshAgent.updateRotation = false;
         navMeshAgent.updateUpAxis = false;
         navMeshAgent.speed = m_movementSpeed;
+        navMeshAgent.enabled = true;
         audioSource = GetComponent<AudioSource>();
         if (movementPoints.Length != 0) {
             randomNumber = Random.Range(0, movementPoints.Length);
@@ -46,7 +47,7 @@ public class EnemyController : MonoBehaviour {
 
     private void Update() {
         if (LevelManager.s_instance.getLevelState() == LevelState.LoadingScene) {
-            navMeshAgent.speed = 0;
+            navMeshAgent.enabled = false;
             return;
         }
         if (stopAttack) {
@@ -78,7 +79,7 @@ public class EnemyController : MonoBehaviour {
         if (collision.gameObject.CompareTag("Player")) {
             LevelManager.s_instance.ChangeEnemySprite(backViewSprite);
             TransitionManager.instance.StartTransition();
-            //LevelManager.s_instance.ChangeLevelState(LevelState.Dodging);
+            LevelManager.s_instance.ChangeLevelState(LevelState.LoadingScene);
             audioSource.clip = hitPlayerAudioClip;
             audioSource.Play();
         }
