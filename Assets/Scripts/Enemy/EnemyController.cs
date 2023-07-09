@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour {
                 break;
             case EnemyState.chasing:
                 move();
-                lookAtPlayer();
+                lookAtTarget(player);
                 break;
         }
     }
@@ -59,8 +59,8 @@ public class EnemyController : MonoBehaviour {
         }
     }
 
-    private void lookAtPlayer() {
-        Vector2 distance = player.position - transform.position;
+    private void lookAtTarget(Transform target) {
+        Vector2 distance = target.position - transform.position;
         distance = distance.normalized;
         animator.SetFloat("xMovement", distance.x);
         animator.SetFloat("yMovement", distance.y);
@@ -83,6 +83,7 @@ public class EnemyController : MonoBehaviour {
     private void Patrol() {
         //transform.position = Vector2.MoveTowards(transform.position, movementPoints[randomNumber].position, movementSpeed * Time.deltaTime);
         navMeshAgent.SetDestination(movementPoints[randomNumber].position);
+        lookAtTarget(movementPoints[randomNumber]);
         if (Vector2.Distance(transform.position, movementPoints[randomNumber].position) < minimalDistance) {
             randomNumber = Random.Range(0, movementPoints.Length);
         }
