@@ -33,6 +33,9 @@ public class GameManager : MonoBehaviour {
             case GameState.LoadLevel:
                 loadLevel();
                 break;
+            case GameState.HowToPlay:
+                howToPlay();
+                break;
             case GameState.Playing:
                 break;
             case GameState.RestartLevel:
@@ -66,6 +69,10 @@ public class GameManager : MonoBehaviour {
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void howToPlay() {
+        SceneManager.LoadScene("HowToPlay");
+    }
+
     private void restartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -83,6 +90,7 @@ public enum GameState {
     None,
     LoadMainMenu,
     MainMenu,
+    HowToPlay,
     LoadLevel,
     Playing,
     RestartLevel,
