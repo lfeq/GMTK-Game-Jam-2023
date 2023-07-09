@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,48 +6,37 @@ public class CaughtInBall : MonoBehaviour
 {
     #region Public
     public Image canvasSlider;
+    public AnimationCurve curve;
     #endregion
 
     #region Private
+    private int timesCaught = 0;
     float maxFillAmount = 1;
     float currentAmount;
-    float gettingCaught = 0.1f;
+    float gettingCaughtSpeed = 0.1f;
     float turningSpeed = 25f;
     bool hasEscaped;
     bool rotateCounterClockwise = true;
     bool hasLost;
+    float escapingSpeed = 0.03f;
+
     #endregion
 
     private void Start() {
         currentAmount = 0.6f;
+        setTimeCaught(LevelManager.s_instance.getTimesCaught());
         canvasSlider.fillAmount = currentAmount;
         PlayerControllerBattle.instance.isInBall = true;
+        escapingSpeed = curve.Evaluate(timesCaught);
+        Debug.Log("escaping speed: " + escapingSpeed);
     }
 
     private void Update() {
-        if(canvasSlider.fillAmount >= maxFillAmount) {
-            hasEscaped = true;
-            PlayerControllerBattle.instance.isInBall = false;
-            PlayerControllerBattle.instance.spriteRenderer.enabled = true;
-            LevelManager.s_instance.ChangeLevelState(LevelState.Escaping);
-            Destroy(gameObject);
+        escapeBall();
 
-        }
+        changeSliderSpeed();
 
-        if(!hasEscaped && !hasLost) {
-            canvasSlider.fillAmount -= gettingCaught * Time.deltaTime;
-            shakeBall();
-        }
-
-        if(canvasSlider.fillAmount <= 0f) {
-            hasLost = true;
-            Debug.Log("You lose");
-        }
-        else {
-            if(Input.GetMouseButtonDown(0)) {
-                canvasSlider.fillAmount += 0.03f;
-            }
-        }
+        checkIfYouHaveBeenTrapped();
     }
 
     void shakeBall() {
@@ -63,5 +53,43 @@ public class CaughtInBall : MonoBehaviour
                 rotateCounterClockwise = !rotateCounterClockwise;
             }
         }  
+    }
+
+    void setTimeCaught(int t_timeCaught) {
+        if (t_timeCaught == 0) {
+            return;
+        }
+        timesCaught = t_timeCaught;
+    }
+
+    void changeSliderSpeed() {
+        if (!hasEscaped && !hasLost) { 
+            canvasSlider.fillAmount -= (gettingCaughtSpeed * Time.deltaTime);
+            //Debug.Log("Times caught: " + timesCaught);
+            //Debug.Log("getting caught speed: " + gettingCaughtSpeed + (timesCaught * 0.05f));
+            shakeBall();
+        }
+    }
+
+    void checkIfYouHaveBeenTrapped() {
+        if (canvasSlider.fillAmount <= 0f) {
+            hasLost = true;
+            Debug.Log("You lose");
+        } else {
+            if (Input.GetMouseButtonDown(0)) {
+                canvasSlider.fillAmount += escapingSpeed;
+                Debug.Log("Escaping speed 2: " + escapingSpeed);
+            }
+        }
+    }
+
+    void escapeBall() {
+        if (canvasSlider.fillAmount >= maxFillAmount) {
+            hasEscaped = true;
+            PlayerControllerBattle.instance.isInBall = false;
+            PlayerControllerBattle.instance.spriteRenderer.enabled = true;
+            LevelManager.s_instance.ChangeLevelState(LevelState.Escaping);
+            Destroy(gameObject);
+        }
     }
 }
