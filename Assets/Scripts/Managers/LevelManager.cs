@@ -28,6 +28,7 @@ public class LevelManager : MonoBehaviour {
 
     private void Start() {
         GameManager.s_instance.changeGameSate(GameState.Playing);
+        MusicManager.s_instance.PlayLevelMusic(escapingMusic);
     }
 
     public void ChangeLevelState(LevelState t_levelState) {
