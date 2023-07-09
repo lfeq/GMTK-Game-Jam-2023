@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour {
     }
 
     private void FixedUpdate() {
+        if (LevelManager.s_instance.getLevelState() == LevelState.LoadingScene) {
+            return;
+        }
         PlayerMoment();
     }
 
