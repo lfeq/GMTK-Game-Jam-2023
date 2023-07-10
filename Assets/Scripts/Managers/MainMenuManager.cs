@@ -22,11 +22,12 @@ public class MainMenuManager : MonoBehaviour {
     public void StartGame() {
         GameManager.s_instance.changeGameSate(GameState.LoadLevel);
     }
+
     public void MainMenu() {
         GameManager.s_instance.changeGameSate(GameState.MainMenu);
     }
-    public void HowToPlay() {
 
+    public void HowToPlay() {
         GameManager.s_instance.changeGameSate(GameState.HowToPlay);
     }
 

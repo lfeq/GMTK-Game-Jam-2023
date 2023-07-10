@@ -1,16 +1,13 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class EnemyControllerBattle : MonoBehaviour
-{
+public class EnemyControllerBattle : MonoBehaviour {
     public static EnemyControllerBattle instance;
-    [SerializeField] GameObject catchingBall;
+    [SerializeField] private GameObject catchingBall;
     public bool canShoot;
-    [SerializeField] float timer = 3f;
+    [SerializeField] private float timer = 3f;
     private float setTime;
     private int throwBallCounter = 0;
 
-   
     private void Awake() {
         instance = this;
     }
@@ -30,8 +27,8 @@ public class EnemyControllerBattle : MonoBehaviour
         }
     }
 
-    void tryToCatch() {
-        if(throwBallCounter > 5) {
+    private void tryToCatch() {
+        if (throwBallCounter > 5) {
             LevelManager.s_instance.ChangeLevelState(LevelState.LoadingScene);
             TransitionManager.instance.StartTransition();
         }
@@ -39,4 +36,3 @@ public class EnemyControllerBattle : MonoBehaviour
         GameObject ball = Instantiate(catchingBall, transform.position, Quaternion.identity);
     }
 }
-

@@ -1,19 +1,20 @@
-using System.Collections;
 using UnityEngine;
 
 public class PlayerControllerBattle : MonoBehaviour {
     public static PlayerControllerBattle instance;
     public bool playerInPosition = false;
+
     [HideInInspector]
     public bool isInBall;
+
     [HideInInspector]
     public SpriteRenderer spriteRenderer;
 
-    [SerializeField] float speed = 5f;
-    [SerializeField] GameObject catchingBall;
+    [SerializeField] private float speed = 5f;
+    [SerializeField] private GameObject catchingBall;
 
-    Rigidbody2D rgbd;
-    Animator animator;
+    private Rigidbody2D rgbd;
+    private Animator animator;
     private bool axisPressed;
     private float xMove;
     private int timesCaught = 0;
@@ -34,21 +35,21 @@ public class PlayerControllerBattle : MonoBehaviour {
         movePlayer();
     }
 
-    void movePlayer() {
-        if(PlayerManager.instance.getPlayerState() == PlayerState.DeadState) {
+    private void movePlayer() {
+        if (PlayerManager.instance.getPlayerState() == PlayerState.DeadState) {
             return;
         }
 
-        if(!isInBall) {
+        if (!isInBall) {
             xMove = Input.GetAxisRaw("Horizontal") * speed;
         }
 
-        if(xMove == 0) {
+        if (xMove == 0) {
             axisPressed = false;
         }
 
-        if(xMove < 0 && transform.position.x > -speed) {
-            if(MoveCatchingBall.instance == null) {
+        if (xMove < 0 && transform.position.x > -speed) {
+            if (MoveCatchingBall.instance == null) {
                 if (axisPressed == false) {
                     axisPressed = true;
                     //MoveCatchingBall.instance.setIsBallLaunched(false);
@@ -65,7 +66,7 @@ public class PlayerControllerBattle : MonoBehaviour {
             }
         }
 
-        if(xMove > 0 && transform.position.x < speed) {
+        if (xMove > 0 && transform.position.x < speed) {
             if (MoveCatchingBall.instance == null) {
                 if (axisPressed == false) {
                     axisPressed = true;
@@ -90,10 +91,9 @@ public class PlayerControllerBattle : MonoBehaviour {
         timesCaught++;
         LevelManager.s_instance.setTimesCaught(timesCaught);
         EnemyControllerBattle.instance.canShoot = false;
-
     }
-    bool canEscapeFromBall() {
+
+    private bool canEscapeFromBall() {
         return false;
     }
 }
-
