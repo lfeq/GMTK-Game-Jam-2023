@@ -79,13 +79,15 @@ public class GameManager : MonoBehaviour {
     public void howToPlay() {
         SceneManager.LoadScene("HowToPlay");
     }
-    public void credits(){
+
+    public void credits() {
         SceneManager.LoadScene("Credits");
     }
 
     public void gameOver() {
         SceneManager.LoadScene("GameOver");
     }
+
     private void restartLevel() {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -97,6 +99,7 @@ public class GameManager : MonoBehaviour {
     public void win() {
         SceneManager.LoadScene("Win");
     }
+
     private void quitGame() {
         Application.Quit();
     }

@@ -20,14 +20,12 @@ public class MoveCatchingBall : MonoBehaviour {
         positionsArray[2] = new Vector2(5f, 2.5f);
     }
 
-    
-
     private void Start() {
         int randomPos = Random.Range(0, positionsArray.Length);
         randomPlayerPosition = positionsArray[randomPos];
         setTimeCaught(LevelManager.s_instance.getTimesCaught());
         ballSpeed += timesCaught;
-        Debug.Log("Times caught: " +  timesCaught);
+        Debug.Log("Times caught: " + timesCaught);
     }
 
     private void FixedUpdate() {
@@ -36,7 +34,7 @@ public class MoveCatchingBall : MonoBehaviour {
         if (Vector2.Distance(transform.position, randomPlayerPosition) < 0.1f) {
             isBallLaunched = false;
             Destroy(gameObject);
-        } 
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision) {
