@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2594086473140712813}
   - component: {fileID: 2527303333822060198}
   - component: {fileID: 1393379877761137480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Monk
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -178,6 +178,12 @@ MonoBehaviour:
   minimalDistance: 0
   hitProjectileAudioClip: {fileID: 8300000, guid: 8749ffc03beeef64586bdba7052c286b, type: 3}
   hitPlayerAudioClip: {fileID: 8300000, guid: 9a0441913e15d504fa72b0bf8b2882a9, type: 3}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!195 &2527303333822060198
 NavMeshAgent:
   m_ObjectHideFlags: 0

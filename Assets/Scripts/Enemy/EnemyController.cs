@@ -22,11 +22,15 @@ public class EnemyController : MonoBehaviour {
     private int randomNumber;
     private bool stopAttack;
     private AudioSource audioSource;
+    private int playerLayerMask;
+    private int enemyLayerMask;
 
     private void Awake() {
         if (navMeshAgent == null) {
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
+        playerLayerMask = LayerMask.NameToLayer("Player");
+        enemyLayerMask = LayerMask.NameToLayer("Enemy");
     }
 
     private void Start() {
@@ -93,6 +97,7 @@ public class EnemyController : MonoBehaviour {
         if (navMeshAgent == null) {
             navMeshAgent = GetComponent<NavMeshAgent>();
         }
+        Physics2D.IgnoreLayerCollision(playerLayerMask, enemyLayerMask);
         stopAttack = true;
         navMeshAgent.speed = 0;
         Slow();
@@ -146,6 +151,7 @@ public class EnemyController : MonoBehaviour {
     private IEnumerator AtivateAttack() {
         yield return new WaitForSeconds(3);
         stopAttack = false;
+        Physics2D.IgnoreLayerCollision(playerLayerMask, enemyLayerMask, true);
     }
 }
 
