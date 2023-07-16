@@ -1,5 +1,10 @@
 using UnityEngine;
 
+/// <summary>
+/// The PlayerControllerBattle class handles the player's movement and interactions during battle scenes.
+/// It allows the player to move horizontally to dodge enemy attacks.
+/// The class keeps track of the player's position, whether the player is in a catching ball or not, and the number of times caught.
+/// </summary>
 public class PlayerControllerBattle : MonoBehaviour {
     public static PlayerControllerBattle instance;
     public bool playerInPosition = false;
@@ -35,6 +40,18 @@ public class PlayerControllerBattle : MonoBehaviour {
         movePlayer();
     }
 
+    private void OnTriggerEnter2D(Collider2D collision) {
+        spriteRenderer.enabled = false;
+        Instantiate(catchingBall, transform.position, Quaternion.identity);
+        timesCaught++;
+        LevelManager.s_instance.setTimesCaught(timesCaught);
+        EnemyControllerBattle.instance.canShoot = false;
+    }
+
+    /// <summary>
+    /// Handles the player's movement during the battle scene.
+    /// The player can move horizontally to dodge enemy attacks.
+    /// </summary>
     private void movePlayer() {
         if (PlayerManager.instance.getPlayerState() == PlayerState.DeadState) {
             return;
@@ -85,14 +102,11 @@ public class PlayerControllerBattle : MonoBehaviour {
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision) {
-        spriteRenderer.enabled = false;
-        Instantiate(catchingBall, transform.position, Quaternion.identity);
-        timesCaught++;
-        LevelManager.s_instance.setTimesCaught(timesCaught);
-        EnemyControllerBattle.instance.canShoot = false;
-    }
-
+    /// <summary>
+    /// Determines if the player can escape from the catching ball.
+    /// This method is not currently implemented and always returns false.
+    /// </summary>
+    /// <returns>Returns false as the player cannot escape from the catching ball.</returns>
     private bool canEscapeFromBall() {
         return false;
     }

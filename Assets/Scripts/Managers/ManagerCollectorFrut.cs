@@ -1,6 +1,10 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// The ManagerCollectorFrut class manages the collection of fruits in the game.
+/// It keeps track of the number of fruits collected and handles the win condition.
+/// </summary>
 public class ManagerCollectorFrut : MonoBehaviour {
     public static ManagerCollectorFrut instance;
 
@@ -18,13 +22,12 @@ public class ManagerCollectorFrut : MonoBehaviour {
         fruts = 0;
     }
 
-    private void WinCondition() {
-        if (fruts >= 5) {
-            //canvasWin.SetActive(true);
-            GameManager.s_instance.changeGameSate(GameState.Win);
-        }
-    }
-
+    /// <summary>
+    /// getFruits method is called when a fruit is collected.
+    /// It updates the corresponding fruit image and game object state,
+    /// increments the fruit count, and checks if the win condition is met.
+    /// </summary>
+    /// <param name="index">The index of the fruit to be collected.</param>
     public void getFruits(int index) {
         switch (index) {
             case 0:
@@ -49,8 +52,19 @@ public class ManagerCollectorFrut : MonoBehaviour {
                 break;
             default: break;
         }
-        Debug.Log("Frutitas");
+        //Debug.Log("Frutitas");
         fruts++;
         WinCondition();
+    }
+
+    /// <summary>
+    /// WinCondition checks if the required number of fruits have been collected.
+    /// If so, it triggers the win state in the game.
+    /// </summary>
+    private void WinCondition() {
+        if (fruts >= 5) {
+            //canvasWin.SetActive(true);
+            GameManager.s_instance.changeGameSate(GameState.Win);
+        }
     }
 }
