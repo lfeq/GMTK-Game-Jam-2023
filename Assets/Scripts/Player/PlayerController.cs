@@ -1,7 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// The PlayerController class manages the player's movement and animation.
+/// It provides methods to handle player input and movement, as well as animations and flipping the player sprite.
+/// The class also keeps track of the player's states and interactions with the game world.
+/// </summary>
 public class PlayerController : MonoBehaviour {
     public static PlayerController instance;
 
@@ -28,6 +31,9 @@ public class PlayerController : MonoBehaviour {
         PlayerMoment();
     }
 
+    /// <summary>
+    /// Handles the player's movement and animation based on user input.
+    /// </summary>
     private void PlayerMoment() {
         float xMove, yMove;
         xMove = Input.GetAxisRaw("Horizontal");
@@ -54,6 +60,9 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Flips the player's sprite horizontally to face the movement direction.
+    /// </summary>
     private void flip() {
         transform.Rotate(0, 180, 0);
         isFacingRight = !isFacingRight;

@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// The MainMenuManager class manages the main menu scene and its interactions.
+/// It handles starting the game, displaying the how-to-play and credits screens, and playing background music.
+/// </summary>
 public class MainMenuManager : MonoBehaviour {
     [SerializeField] private GameObject coverGameObject;
     [SerializeField] private AudioClip[] levelMusic;
@@ -19,17 +23,30 @@ public class MainMenuManager : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Starts the game by changing the game state to LoadLevel.
+    /// </summary>
     public void StartGame() {
         GameManager.s_instance.changeGameSate(GameState.LoadLevel);
     }
+
+    /// <summary>
+    /// Returns to the main menu by changing the game state to MainMenu.
+    /// </summary>
     public void MainMenu() {
         GameManager.s_instance.changeGameSate(GameState.MainMenu);
     }
-    public void HowToPlay() {
 
+    /// <summary>
+    /// Shows the how-to-play screen by changing the game state to HowToPlay.
+    /// </summary>
+    public void HowToPlay() {
         GameManager.s_instance.changeGameSate(GameState.HowToPlay);
     }
 
+    /// <summary>
+    /// Shows the credits screen by changing the game state to Credits.
+    /// </summary>
     public void Credits() {
         GameManager.s_instance.changeGameSate(GameState.Credits);
     }

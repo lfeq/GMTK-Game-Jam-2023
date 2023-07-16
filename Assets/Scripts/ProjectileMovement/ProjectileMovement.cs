@@ -1,5 +1,9 @@
 using UnityEngine;
 
+/// <summary>
+/// The ProjectileMovement class handles the movement of a projectile in the game.
+/// It sets the initial direction and speed of the projectile and destroys it after a certain time.
+/// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 public class ProjectileMovement : MonoBehaviour {
     [SerializeField] private float moveSpeed = 4f;

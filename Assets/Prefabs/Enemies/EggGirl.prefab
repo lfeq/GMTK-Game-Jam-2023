@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 820332312234501030}
   - component: {fileID: 769948875954908381}
   - component: {fileID: 105815861640869305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EggGirl
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -178,6 +178,12 @@ MonoBehaviour:
   minimalDistance: 0
   hitProjectileAudioClip: {fileID: 8300000, guid: 8749ffc03beeef64586bdba7052c286b, type: 3}
   hitPlayerAudioClip: {fileID: 8300000, guid: 9a0441913e15d504fa72b0bf8b2882a9, type: 3}
+  playerLayerMask:
+    serializedVersion: 2
+    m_Bits: 128
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!195 &769948875954908381
 NavMeshAgent:
   m_ObjectHideFlags: 0
