@@ -9,14 +9,7 @@ public class CaughtInBall : MonoBehaviour {
 
     #region Public
 
-    /// <summary>
-    /// The slider UI element that represents the escape progress of the player.
-    /// </summary>
     public Image canvasSlider;
-
-    /// <summary>
-    /// The animation curve used to determine the escaping speed based on the number of times caught.
-    /// </summary>
     public AnimationCurve curve;
 
     #endregion Public
